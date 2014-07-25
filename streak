@@ -1,0 +1,12 @@
+#!/bin/sh
+# Commit twice every day.
+set -e
+
+END=$(date +%s)
+
+now=$(date -d 2005-08-03 +%s)
+while test $now -lt $END; do
+  now=$(($now + 60 * 60 * 12))
+done
+
+# GIT_AUTHOR_DATE and GIT_COMMITTER_DATE 
