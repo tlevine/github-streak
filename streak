@@ -2,17 +2,30 @@
 # Commit twice every day.
 set -e
 
+USAGE="$0 [empty directory]"
+
+REPOSITORY="$1"
+if ! test -d "$REPOSITORY"; then
+  echo "$USAGE" > /dev/stderr
+  exit 1
+fi
+
 HALFDAY=$((60 * 60 * 12))
 END=$(date +%s)
 
 now=$(date -d 2005-08-03 +%s)
+
+cd "$REPOSITORY"
+
+git init
+touch date
+git add date
 while test $now -lt $END; do
   now=$(($now + $HALFDAY))
   random=$(($HALFDAY * $RANDOM / 32767))
   commit=$(($now + $random))
+  echo $commit > date
   export GIT_AUTHOR_DATE=$commit 
   export GIT_COMMITTER_DATE=$commit 
-  echo $commit > date
-  git add date
   git commit date -m $commit
 done
