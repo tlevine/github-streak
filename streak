@@ -10,8 +10,9 @@ while test $now -lt $END; do
   now=$(($now + $HALFDAY))
   random=$(($HALFDAY * $RANDOM / 32767))
   commit=$(($now + $random))
-  EXPORT
-  echo $commit
+  export GIT_AUTHOR_DATE=$commit 
+  export GIT_COMMITTER_DATE=$commit 
+  echo $commit > date
+  git add date
+  git commit date -m $commit
 done
-
-# GIT_AUTHOR_DATE and GIT_COMMITTER_DATE 
