@@ -27,5 +27,5 @@ while test $now -lt $END; do
   echo $commit > date
   export GIT_AUTHOR_DATE=$commit 
   export GIT_COMMITTER_DATE=$commit 
-  git commit date -m $commit
+  git commit date -m $commit > /dev/null
 done
