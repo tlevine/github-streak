@@ -9,7 +9,9 @@ now=$(date -d 2005-08-03 +%s)
 while test $now -lt $END; do
   now=$(($now + $HALFDAY))
   random=$(($HALFDAY * $RANDOM / 32767))
-  echo $random
+  commit=$(($now + $random))
+  EXPORT
+  echo $commit
 done
 
 # GIT_AUTHOR_DATE and GIT_COMMITTER_DATE 
