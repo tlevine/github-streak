@@ -56,7 +56,7 @@ if ! test -d "$REPOSITORY"; then
 fi
 
 HALFDAY=$((60 * 60 * 12))
-END=$(date +%s)
+END=$(date --date=$(echo "$dates" | grep 2014 | tail -n1) +%s)
 
 cd "$REPOSITORY"
 
