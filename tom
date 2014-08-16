@@ -84,3 +84,8 @@ while test $now -lt $END; do
     done
   fi
 done
+
+# $ sed -n '4,6 s/^# //p' tom|tr -d '\n' | tr -d \  |wc -c
+# 23
+#
+# There should be 300 * (23 - 1) = 6600 commits.
