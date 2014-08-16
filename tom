@@ -7,6 +7,46 @@
 # 
 set -e
 
+# Dates I want to draw on
+dates='
+TTTTTTTTTT
+2014-06-04
+
+2014-06-11
+2014-06-12
+2014-06-13
+
+2014-06-18
+
+OOOOOOOOOO
+2014-07-02
+2014-07-03
+2014-07-04
+
+2014-07-09
+2014-07-11
+
+2014-07-16
+2014-07-17
+2014-07-18
+
+MMMMMMMMMM
+2014-07-30
+2014-07-31
+2014-08-01
+
+2014-08-06
+
+2014-08-13
+2014-08-14
+
+2014-08-20
+
+2014-08-27
+2014-08-28
+2014-08-29
+'
+
 USAGE="$0 [directory]"
 
 REPOSITORY="$1"
@@ -31,8 +71,9 @@ fi
 git add date
 while test $now -lt $END; do
   now=$(($now + 2 * $HALFDAY))
-  # if now is a date that I want to draw on; then
-    for i in $(seq 100); do
+  # if now is a date that I want to draw on
+  if echo "$dates" | grep $(date --date=@$now --rfc-3339 date) > /dev/null; then 
+    for i in $(seq 300); do
       random=$(($HALFDAY * $RANDOM / 32767))
       commit=$(($now + $random))
       echo $commit > date
