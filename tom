@@ -1,0 +1,44 @@
+#!/bin/sh
+# Draw "Tom".
+#
+# T T T   O O O   M M M M M
+#   T     O   O   M   M   M
+#   T     O O O   M       M
+# 
+set -e
+
+USAGE="$0 [directory]"
+
+REPOSITORY="$1"
+if ! test -d "$REPOSITORY"; then
+  echo "$USAGE" > /dev/stderr
+  exit 1
+fi
+
+HALFDAY=$((60 * 60 * 12))
+END=$(date +%s)
+
+
+cd "$REPOSITORY"
+
+if test -f date; then
+  now=$(cat date)
+else
+  now=$(date -d 2005-08-03 +%s)
+  git init
+  touch date
+fi
+git add date
+while test $now -lt $END; do
+  now=$(($now + 2 * $HALFDAY))
+  # if now is a date that I want to draw on; then
+    for i in $(seq 100); do
+      random=$(($HALFDAY * $RANDOM / 32767))
+      commit=$(($now + $random))
+      echo $commit > date
+      export GIT_AUTHOR_DATE=$commit 
+      export GIT_COMMITTER_DATE=$commit 
+      git commit date -m $commit > /dev/null
+    done
+  fi
+done
