@@ -58,13 +58,14 @@ fi
 HALFDAY=$((60 * 60 * 12))
 END=$(date +%s)
 
-
 cd "$REPOSITORY"
 
 if test -f date; then
   now=$(cat date)
 else
-  now=$(date -d 2005-08-03 +%s)
+  firstdate=$(echo "$dates" | grep -m1 2014)
+  echo "$firstdate"
+  now=$(date -d $firstdate +%s)
   git init
   touch date
 fi
