@@ -56,7 +56,7 @@ if ! test -d "$REPOSITORY"; then
 fi
 
 HALFDAY=$((60 * 60 * 12))
-END=$(date --date=$(echo "$dates" | grep 2014 | tail -n1) +%s)
+END=$(($(date --date=$(echo "$dates" | grep 2014 | tail -n1) +%s) + 2 * $HALFDAY))
 
 cd "$REPOSITORY"
 
@@ -65,7 +65,7 @@ if test -f date; then
 else
   firstdate=$(echo "$dates" | grep -m1 2014)
   echo "$firstdate"
-  now=$(date -d $firstdate +%s)
+  now=$(($(date -d $firstdate +%s) - 2 * $HALFDAY))
   git init
   touch date
 fi
