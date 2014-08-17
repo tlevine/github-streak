@@ -11,7 +11,7 @@ if ! test -d "$REPOSITORY"; then
 fi
 
 HALFDAY=$((60 * 60 * 12))
-END=$(date +%s)
+END=$(($(date +%s) + 100 * $HALFDAY))
 
 
 cd "$REPOSITORY"
