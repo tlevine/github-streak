@@ -5,3 +5,21 @@ https://www.kernel.org/pub/software/scm/git/docs/git-commit.html#_date_formats
 https://help.github.com/articles/why-are-my-contributions-not-showing-up-on-my-profile
 
 http://tldp.org/LDP/abs/html/randomvar.html
+
+
+Idea for drawing a thing
+=========================
+The input is an image that is
+
+* black-and-white (not greyscale)
+* 52 pixels wide
+* 7 pixels tall, or 6 pixels to be safe
+
+The top row corresponds to Sunday if the image is 7 tall,
+or Monday if the image is 6 tall (to be safe). And the
+bottom row is Saturday.
+
+The other input is a date in the right-most week; I use
+this to align the first input, which is a year of days. 
+
+Then the program figures out what to commit where.
